@@ -5,6 +5,8 @@ import { useState, useEffect, useMemo } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 
 import SnackList from "~/components/SnackList";
+import LoadingList from "~/components/LoadingList";
+import { cn } from "~/lib/utils";
 
 const data: ICard[] = [
   {
@@ -78,6 +80,12 @@ const data: ICard[] = [
 
 export default function Home() {
   const [snacks, setSnacks] = useState<ICard[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const disabled = useMemo(
+    () => (loading ? "pointer-events-none" : ""),
+    [loading]
+  );
 
   const burgers = useMemo(
     () => snacks.filter((snack) => snack.type === "burger"),
@@ -95,26 +103,35 @@ export default function Home() {
   useEffect(() => {
     // const response = fetch('api')
     // const data = response.json()
-    const timeout = setTimeout(() => {
-      setSnacks(data);
-    }, 1000);
+    let timeout: NodeJS.Timeout;
+
+    if (loading || snacks.length === 0) {
+      timeout = setTimeout(() => {
+        setLoading(false);
+        setSnacks(data);
+      }, 1000);
+    }
 
     return () => {
-      clearTimeout(timeout);
+      timeout && clearTimeout(timeout);
     };
-  }, []);
+  }, [loading, snacks]);
 
   return (
     <main>
       <header>
-        <Tabs defaultValue="hamburgers" className="w-[400px]">
+        <Tabs defaultValue="hamburgers" className={cn("w-[400px]", disabled)}>
           <TabsList>
             <TabsTrigger value="hamburgers">Lanches</TabsTrigger>
             <TabsTrigger value="drinks">Bebidas</TabsTrigger>
             <TabsTrigger value="side-dish">Acompanhamentos</TabsTrigger>
           </TabsList>
           <TabsContent value="hamburgers">
-            <SnackList snacks={burgers} type="burger" />
+            {loading ? (
+              <LoadingList />
+            ) : (
+              <SnackList snacks={burgers} type="burger" />
+            )}
           </TabsContent>
           <TabsContent value="drinks">
             <SnackList snacks={drinks} type="drink" />

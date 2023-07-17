@@ -1,16 +1,12 @@
-import Image from "next/image";
 import { FC } from "react";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-
-import burgerImg from "public/burger.png";
 
 const SnackCard: FC<ISnackCardProps> = ({ snack }) => {
   return (
