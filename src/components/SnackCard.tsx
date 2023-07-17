@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FC } from "react";
 
 import {
@@ -13,7 +14,7 @@ const SnackCard: FC<ISnackCardProps> = ({ snack }) => {
     <Card>
       <CardHeader>
         <div>
-          <img
+          <Image
             src={snack.thumbnail}
             alt={snack.title}
             width="150"
