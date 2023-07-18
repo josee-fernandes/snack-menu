@@ -118,29 +118,30 @@ export default function Home() {
   }, [loading, snacks]);
 
   return (
-    <main>
-      <header>
-        <Tabs defaultValue="hamburgers" className={cn("w-[400px]", disabled)}>
-          <TabsList>
-            <TabsTrigger value="hamburgers">Lanches</TabsTrigger>
-            <TabsTrigger value="drinks">Bebidas</TabsTrigger>
-            <TabsTrigger value="side-dish">Acompanhamentos</TabsTrigger>
-          </TabsList>
-          <TabsContent value="hamburgers">
-            {loading ? (
-              <LoadingList />
-            ) : (
-              <SnackList snacks={burgers} type="burger" />
-            )}
-          </TabsContent>
-          <TabsContent value="drinks">
-            <SnackList snacks={drinks} type="drink" />
-          </TabsContent>
-          <TabsContent value="side-dish">
-            <SnackList snacks={sideDishes} type="side-dish" />
-          </TabsContent>
-        </Tabs>
-      </header>
+    <main className="w-[90%] max-w-5xl mx-auto">
+      <Tabs
+        defaultValue="hamburgers"
+        className={cn("items-center flex flex-col", disabled)}
+      >
+        <TabsList>
+          <TabsTrigger value="hamburgers">Lanches</TabsTrigger>
+          <TabsTrigger value="drinks">Bebidas</TabsTrigger>
+          <TabsTrigger value="side-dish">Acompanhamentos</TabsTrigger>
+        </TabsList>
+        <TabsContent value="hamburgers">
+          {loading ? (
+            <LoadingList />
+          ) : (
+            <SnackList snacks={burgers} type="burger" />
+          )}
+        </TabsContent>
+        <TabsContent value="drinks">
+          <SnackList snacks={drinks} type="drink" />
+        </TabsContent>
+        <TabsContent value="side-dish">
+          <SnackList snacks={sideDishes} type="side-dish" />
+        </TabsContent>
+      </Tabs>
     </main>
   );
 }

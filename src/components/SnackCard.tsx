@@ -11,7 +11,7 @@ import {
 
 const SnackCard: FC<ISnackCardProps> = ({ snack }) => {
   return (
-    <Card>
+    <Card className="w-[90%] max-w-[400px]">
       <CardHeader>
         <div>
           <Image

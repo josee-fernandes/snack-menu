@@ -11,7 +11,7 @@ import {
 
 const LoadingCard: FC = () => {
   return (
-    <Card>
+    <Card className="w-[90%] max-w-[400px]">
       <CardHeader>
         <Skeleton className="w-[150px] h-[125px] rounded" />
         <div className="text-2xl font-semibold leading-none tracking-tight">
