@@ -118,7 +118,7 @@ export default function Home() {
   }, [loading, snacks]);
 
   return (
-    <main className="w-[90%] max-w-5xl mx-auto">
+    <main className="w-full max-w-5xl mx-auto">
       <Tabs
         defaultValue="hamburgers"
         className={cn("items-center flex flex-col", disabled)}
